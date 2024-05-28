@@ -1,8 +1,9 @@
 require('dotenv').config();
 import express, { Response } from 'express';
 import { getMetadata } from './lib';
-const cron = require('node-cron');
-const fetch = require('node-fetch');
+
+import cron from 'node-cron';
+import fetch from 'node-fetch';
 // import { checkForCache, createCache } from './lib/cache';
 import { APIOutput } from './types';
 
