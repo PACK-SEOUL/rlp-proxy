@@ -75,13 +75,14 @@ app.get('/v2', async (req, res) => {
    
       const { title, description, image, publisher } = metadata;
 
-       output = {
+      output = {
         title,
         description,
         image,
         siteName: publisher,
         hostname,
       };
+      console.log('output',output);
 
       sendResponse(res, output);
 
