@@ -99,7 +99,7 @@ app.get('/v2', async (req, res) => {
 // Schedule a cron job to perform a self-request every week
 // '0 0 */7 * 0'
 // Schedule a cron job to perform a self-request every week
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 0 */7 * 0', async () => {
   try {
     const encodedURI = encodeURI('https://www.wikipedia.org/');
     const response = await fetch(`https://rlp-proxy-pack.fly.dev/?url=${encodedURI}`);
