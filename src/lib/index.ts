@@ -1,7 +1,6 @@
-import { MetaResult } from '../types';
-// @ts-ignore
-import parser from 'html-metadata-parser';
 import axios, { AxiosRequestConfig } from 'axios';
+import parser from 'html-metadata-parser';
+import { MetaResult } from '../types';
 
 const TWITTER_API_URL = 'https://api.twitter.com/2';
 
@@ -20,7 +19,7 @@ const config: AxiosRequestConfig = {
 
 export const getMetadata = async (url: string): Promise<MetaResult | null> => {
   try {
-    const result = (await parser(url, config)) as MetaResult;
+    const result = (await parser(url)) as MetaResult;
     return result;
   } catch (err) {
     console.log(err);
