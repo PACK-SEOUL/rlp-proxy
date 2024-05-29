@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import parser from 'html-metadata-parser';
+import { default as parser } from 'html-metadata-parser';
 import { MetaResult } from '../types/index.js';
 
 console.log("Imported parser:", parser);
