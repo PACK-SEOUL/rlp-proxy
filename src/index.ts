@@ -66,32 +66,20 @@ app.get('/v2', async (req, res) => {
     if (url && isUrlValid) {
       const { hostname } = new URL(url);
 
-      let output: APIOutput;
+      let output: APIOutput; 
 
       const metadata = await getMetadata(url);
       if (!metadata) {
         return sendResponse(res, null);
       }
-      const { images, og, meta } = metadata!;
+   
+      const { title, description, image, publisher } = metadata;
 
-      let image = og.image
-        ? og.image
-        : images.length > 0
-        ? images[0].src
-        : null;
-      const description = og.description
-        ? og.description
-        : meta.description
-        ? meta.description
-        : null;
-      const title = (og.title ? og.title : meta.title) || '';
-      const siteName = og.site_name || '';
-
-      output = {
+       output = {
         title,
         description,
         image,
-        siteName,
+        siteName: publisher,
         hostname,
       };
 
@@ -109,14 +97,14 @@ app.get('/v2', async (req, res) => {
 
 // Schedule a cron job to perform a self-request every week
 // '0 0 */7 * 0'
-
 // Schedule a cron job to perform a self-request every week
 cron.schedule('* * * * *', async () => {
   try {
     const encodedURI = encodeURI('https://www.wikipedia.org/');
     const response = await fetch(`https://rlp-proxy-pack.fly.dev/?url=${encodedURI}`);
+    const metadata = await response.json();
     if (response.ok) {
-      console.log('Self-request successful, server is kept active.');
+      console.log('Self-request successful, server is kept active.', 'response\n', metadata);
     } else {
       console.log('Self-request failed.');
     }
