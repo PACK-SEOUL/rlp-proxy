@@ -1,7 +1,6 @@
 require('dotenv').config();
 import express, { Response } from 'express';
 import cron from 'node-cron';
-import fetch from 'node-fetch'; // Import node-fetch
 import { getMetadata } from './lib';
 // import { checkForCache, createCache } from './lib/cache';
 import { APIOutput } from './types';
@@ -150,9 +149,12 @@ app.get('/v2', async (req, res) => {
 
 // Schedule a cron job to perform a self-request every week
 // '0 0 */7 * 0'
+
+// Schedule a cron job to perform a self-request every week
 cron.schedule('* * * * *', async () => {
   try {
-    const encodedURI = encodeURI('https://www.wikipedia.org/')
+    const { default: fetch } = await import('node-fetch'); // Dynamic import
+    const encodedURI = encodeURI('https://www.wikipedia.org/');
     const response = await fetch(`https://rlp-proxy-pack.fly.dev/?url=${encodedURI}`);
     if (response.ok) {
       console.log('Self-request successful, server is kept active.');
