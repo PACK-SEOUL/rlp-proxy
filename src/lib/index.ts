@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { parser } from 'html-metadata-parser';
+import parser from 'html-metadata-parser';
 import { MetaResult } from '../types';
 
 const TWITTER_API_URL = 'https://api.twitter.com/2';
