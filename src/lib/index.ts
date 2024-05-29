@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import parser from 'html-metadata-parser';
-import { MetaResult } from '../types';
+import { MetaResult } from '../types/index.js';
+
+console.log("Imported parser:", parser);
 
 const TWITTER_API_URL = 'https://api.twitter.com/2';
 
@@ -16,6 +18,7 @@ const config: AxiosRequestConfig = {
     'Accept-Encoding': 'gzip,deflate,br',
   },
 };
+
 
 export const getMetadata = async (url: string): Promise<MetaResult | null> => {
   try {
